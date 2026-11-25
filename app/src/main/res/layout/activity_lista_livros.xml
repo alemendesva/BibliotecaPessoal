@@ -3,36 +3,37 @@
     LAYOUT DA TELA "MEUS LIVROS" (ListaLivrosActivity).
 
     Estrutura (de cima para baixo):
-      1. Toolbar (barra de título azul)
+      1. Toolbar (barra de título verde-petróleo)
       2. Área de conteúdo: dica de uso + lista rolável de livros (RecyclerView)
-         ou a mensagem de "lista vazia" quando não há livros
+         ou o "estado vazio" ilustrado quando não há livros
       3. Menu inferior (BottomNavigationView)
 
     ConstraintLayout posiciona cada elemento por "restrições" (constraints),
     ex.: "o topo do conteúdo fica embaixo da toolbar".
     O id "main" é usado no código para aplicar o espaçamento das barras do sistema.
+    O fundo do "main" usa a cor da barra superior para pintar também a área da barra de status.
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaria">
+    android:background="@color/barra_superior">
 
+    <!-- Aparência da barra vem do estilo Biblioteca.Toolbar (themes.xml) -->
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Biblioteca.Toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaria"
         app:title="@string/titulo_lista"
-        app:titleTextColor="@color/branco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <!--
-        FrameLayout empilha os filhos um sobre o outro: a lista e a mensagem de
-        "lista vazia" ocupam o mesmo espaço; o código mostra/esconde a mensagem.
+        FrameLayout empilha os filhos um sobre o outro: a lista e o "estado vazio"
+        ocupam o mesmo espaço; o código mostra um ou outro.
         Altura 0dp + constraints = ocupa todo o espaço entre a toolbar e o menu inferior.
     -->
     <FrameLayout
@@ -46,6 +47,7 @@
         app:layout_constraintTop_toBottomOf="@id/toolbar">
 
         <LinearLayout
+            android:id="@+id/layoutLista"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
@@ -55,13 +57,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:paddingStart="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingBottom="4dp"
+                android:paddingStart="@dimen/espaco_grande"
+                android:paddingTop="@dimen/espaco_medio"
+                android:paddingEnd="@dimen/espaco_grande"
+                android:paddingBottom="@dimen/espaco_minimo"
                 android:text="@string/lista_dica"
-                android:textColor="@color/texto_secundario"
-                android:textSize="12sp" />
+                android:textAppearance="@style/Biblioteca.Texto.Legenda" />
 
             <!-- Lista rolável de livros; cada item usa o layout item_livro.xml -->
             <androidx.recyclerview.widget.RecyclerView
@@ -69,33 +70,69 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:clipToPadding="false"
-                android:paddingStart="12dp"
-                android:paddingTop="4dp"
-                android:paddingEnd="12dp"
-                android:paddingBottom="12dp" />
+                android:paddingStart="@dimen/espaco_grande"
+                android:paddingTop="@dimen/espaco_minimo"
+                android:paddingEnd="@dimen/espaco_grande"
+                android:paddingBottom="@dimen/espaco_grande" />
         </LinearLayout>
 
-        <!-- Mensagem exibida só quando não há livros (começa escondida: visibility="gone") -->
-        <TextView
-            android:id="@+id/tvListaVazia"
+        <!--
+            ESTADO VAZIO: exibido só quando não há livros (começa escondido: visibility="gone").
+            Ilustração + título + explicação + botão que leva direto ao cadastro.
+        -->
+        <LinearLayout
+            android:id="@+id/layoutListaVazia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
-            android:padding="32dp"
-            android:text="@string/lista_vazia"
-            android:textColor="@color/texto_secundario"
-            android:textSize="16sp"
-            android:visibility="gone" />
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:padding="@dimen/espaco_extra"
+            android:visibility="gone">
+
+            <!-- Ilustração (ícone grande, pintado na cor principal com transparência) -->
+            <ImageView
+                android:layout_width="@dimen/icone_estado_vazio"
+                android:layout_height="@dimen/icone_estado_vazio"
+                android:alpha="0.85"
+                android:importantForAccessibility="no"
+                android:src="@drawable/ic_estante"
+                app:tint="@color/primaria" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espaco_grande"
+                android:gravity="center"
+                android:text="@string/lista_vazia_titulo"
+                android:textAppearance="@style/Biblioteca.Texto.Titulo" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espaco_pequeno"
+                android:gravity="center"
+                android:text="@string/lista_vazia"
+                android:textAppearance="@style/Biblioteca.Texto.Corpo" />
+
+            <!-- Botão que abre a tela de cadastro (clique tratado em ListaLivrosActivity) -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnPrimeiroLivro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espaco_extra"
+                android:minHeight="@dimen/altura_botao"
+                android:text="@string/btn_primeiro_livro"
+                app:icon="@drawable/ic_adicionar" />
+        </LinearLayout>
     </FrameLayout>
 
     <!-- Menu inferior com 3 itens (definidos em menu/menu_navegacao.xml) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        style="@style/Biblioteca.MenuInferior"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/superficie"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

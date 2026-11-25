@@ -7,27 +7,28 @@
     [faixa colorida] | Título (negrito)
                      | Autor: ...
                      | Ano: ...   Nota: X/10 ........ Lido / Não lido
+
+    MaterialCardView (Material 3) já tem o efeito de toque (ripple) embutido.
+    Cantos, sombra e cor vêm do estilo Biblioteca.Cartao; textos, dos estilos Biblioteca.Texto.*.
 -->
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/Biblioteca.Cartao"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="6dp"
-    android:layout_marginBottom="6dp"
-    android:foreground="?attr/selectableItemBackground"
-    app:cardBackgroundColor="@color/superficie"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_marginTop="@dimen/espaco_pequeno"
+    android:layout_marginBottom="@dimen/espaco_minimo"
+    android:clickable="true"
+    android:focusable="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <!-- Faixa vertical à esquerda: verde se lido, vermelha se não lido (cor definida no Adapter) -->
+        <!-- Faixa vertical à esquerda: verde se lido, terracota se não lido (cor definida no Adapter) -->
         <View
             android:id="@+id/viewIndicador"
-            android:layout_width="6dp"
+            android:layout_width="@dimen/largura_indicador"
             android:layout_height="match_parent"
             android:background="@color/status_nao_lido" />
 
@@ -37,29 +38,31 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:orientation="vertical"
-            android:padding="14dp">
+            android:paddingStart="@dimen/espaco_grande"
+            android:paddingTop="@dimen/espaco_grande"
+            android:paddingEnd="@dimen/espaco_grande"
+            android:paddingBottom="@dimen/espaco_grande">
 
             <TextView
                 android:id="@+id/tvTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/texto_primario"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:textAppearance="@style/Biblioteca.Texto.Titulo" />
 
             <TextView
                 android:id="@+id/tvAutor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="@color/texto_secundario"
-                android:textSize="14sp" />
+                android:layout_marginTop="@dimen/espaco_minimo"
+                android:textAppearance="@style/Biblioteca.Texto.Corpo" />
 
             <!-- Linha inferior: Ano, Nota (ocupa o meio) e Status (encostado à direita) -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="@dimen/espaco_medio"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -67,26 +70,25 @@
                     android:id="@+id/tvAno"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/texto_secundario"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/Biblioteca.Texto.Legenda" />
 
                 <TextView
                     android:id="@+id/tvNota"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
+                    android:layout_marginStart="@dimen/espaco_grande"
                     android:layout_weight="1"
-                    android:textColor="@color/texto_secundario"
-                    android:textSize="13sp" />
+                    android:textAppearance="@style/Biblioteca.Texto.Legenda" />
 
+                <!-- A cor do status é definida no Adapter (verde ou terracota) -->
                 <TextView
                     android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="13sp"
+                    android:textAppearance="@style/Biblioteca.Texto.Legenda"
                     android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

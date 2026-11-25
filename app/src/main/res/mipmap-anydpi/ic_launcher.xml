@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÍCONE DO APP para Android 7.x (API 24 e 25), que não suporta ícones adaptativos.
+    Desenha o mesmo livro sobre um quadrado verde-petróleo de cantos arredondados.
+    (No Android 8+ o sistema usa mipmap-anydpi-v26/ic_launcher.xml no lugar deste.)
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Fundo: quadrado arredondado -->
+    <path
+        android:fillColor="#FF1F5C5A"
+        android:pathData="M22,6h64a16,16 0,0 1,16 16v64a16,16 0,0 1,-16 16h-64a16,16 0,0 1,-16 -16v-64a16,16 0,0 1,16 -16z" />
+    <!-- Página esquerda -->
+    <path
+        android:fillColor="#FFFAF6EE"
+        android:pathData="M27,37C36,32 45,32 53,37L53,78C45,73 36,73 27,78Z" />
+    <!-- Página direita -->
+    <path
+        android:fillColor="#FFFAF6EE"
+        android:pathData="M55,37C63,32 72,32 81,37L81,78C72,73 63,73 55,78Z" />
+    <!-- Linhas de "texto" -->
+    <path
+        android:fillColor="#FFBDEAE4"
+        android:pathData="M33,46h15v2h-15zM33,53h15v2h-15zM33,60h11v2h-11z" />
+    <!-- Marcador de página -->
+    <path
+        android:fillColor="#FFE0A04A"
+        android:pathData="M68,32L76,32L76,52L72,48L68,52Z" />
+</vector>

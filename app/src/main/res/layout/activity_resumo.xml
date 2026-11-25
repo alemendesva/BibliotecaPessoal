@@ -4,25 +4,27 @@
 
     Estrutura:
       1. Toolbar
-      2. Três cartões (CardView) empilhados, cada um com um rótulo e um número grande:
-         Total (azul), Lidos (verde) e Não lidos (vermelho).
+      2. Cartão "Seu progresso de leitura": anel circular com o % de livros lidos
+         (tvPercentual + progressoLeitura) e a frase "X de Y livros lidos" (tvDescricaoProgresso)
+      3. Grade de cartões com ícones:
+           [ Total de livros (largura inteira) ]
+           [ Lidos ]          [ Não lidos ]
          Os números são preenchidos pelo código (tvTotal, tvLidos, tvNaoLidos).
-      3. Menu inferior
+      4. Menu inferior
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaria">
+    android:background="@color/barra_superior">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Biblioteca.Toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaria"
         app:title="@string/titulo_resumo"
-        app:titleTextColor="@color/branco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,118 +43,214 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="@dimen/espaco_grande">
 
-            <!-- Total -->
-            <androidx.cardview.widget.CardView
+            <!-- ==================== CARTÃO DE PROGRESSO ==================== -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Biblioteca.Cartao"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardBackgroundColor="@color/superficie"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                android:layout_height="wrap_content">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
+                    android:gravity="center_horizontal"
                     android:orientation="vertical"
-                    android:padding="20dp">
+                    android:padding="@dimen/espaco_extra">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="@string/resumo_progresso_titulo"
+                        android:textAppearance="@style/Biblioteca.Texto.Titulo" />
+
+                    <!--
+                        FrameLayout sobrepõe o anel e o texto do percentual,
+                        deixando o número centralizado DENTRO do anel.
+                    -->
+                    <FrameLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espaco_grande">
+
+                        <!--
+                            Anel de progresso (Material). max=100 → o valor é o percentual.
+                            indicatorColor = parte preenchida (lidos); trackColor = parte restante.
+                        -->
+                        <com.google.android.material.progressindicator.CircularProgressIndicator
+                            android:id="@+id/progressoLeitura"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:max="100"
+                            app:indicatorColor="@color/status_lido"
+                            app:indicatorSize="@dimen/tamanho_anel"
+                            app:trackColor="@color/trilha_progresso"
+                            app:trackCornerRadius="@dimen/raio_anel"
+                            app:trackThickness="@dimen/espessura_anel" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:gravity="center_horizontal"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvPercentual"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textAppearance="@style/Biblioteca.Texto.Numero"
+                                android:textColor="@color/status_lido" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="@string/resumo_progresso_legenda"
+                                android:textAppearance="@style/Biblioteca.Texto.Legenda" />
+                        </LinearLayout>
+                    </FrameLayout>
+
+                    <!-- Frase de apoio: "X de Y livros lidos" (ou convite a cadastrar, se vazio) -->
+                    <TextView
+                        android:id="@+id/tvDescricaoProgresso"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/espaco_grande"
+                        android:gravity="center"
+                        android:textAppearance="@style/Biblioteca.Texto.Corpo" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- ==================== TOTAL (largura inteira) ==================== -->
+            <com.google.android.material.card.MaterialCardView
+                style="@style/Biblioteca.Cartao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/espaco_medio">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/espaco_extra">
+
+                    <ImageView
+                        android:layout_width="@dimen/icone_medio"
+                        android:layout_height="@dimen/icone_medio"
+                        android:importantForAccessibility="no"
+                        android:src="@drawable/ic_livro"
+                        app:tint="@color/resumo_total" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/espaco_grande"
+                        android:layout_weight="1"
                         android:text="@string/resumo_total"
-                        android:textColor="@color/texto_secundario"
-                        android:textSize="16sp" />
+                        android:textAppearance="@style/Biblioteca.Texto.Rotulo" />
 
                     <TextView
                         android:id="@+id/tvTotal"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/resumo_total"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
+                        android:textAppearance="@style/Biblioteca.Texto.Numero"
+                        android:textColor="@color/resumo_total" />
                 </LinearLayout>
-            </androidx.cardview.widget.CardView>
+            </com.google.android.material.card.MaterialCardView>
 
-            <!-- Lidos -->
-            <androidx.cardview.widget.CardView
+            <!-- ==================== LIDOS | NÃO LIDOS (lado a lado) ==================== -->
+            <!-- layout_weight="1" nos dois cartões = cada um ocupa metade da largura -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/superficie"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                android:layout_marginTop="@dimen/espaco_medio"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                <!-- Lidos -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Biblioteca.Cartao"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_marginEnd="@dimen/espaco_pequeno"
+                    android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/resumo_lidos"
-                        android:textColor="@color/texto_secundario"
-                        android:textSize="16sp" />
+                        android:orientation="vertical"
+                        android:padding="@dimen/espaco_grande">
 
-                    <TextView
-                        android:id="@+id/tvLidos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/status_lido"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:layout_width="@dimen/icone_medio"
+                            android:layout_height="@dimen/icone_medio"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_lido"
+                            app:tint="@color/status_lido" />
 
-            <!-- Não lidos -->
-            <androidx.cardview.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                app:cardBackgroundColor="@color/superficie"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="2dp">
+                        <TextView
+                            android:id="@+id/tvLidos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/espaco_medio"
+                            android:textAppearance="@style/Biblioteca.Texto.Numero"
+                            android:textColor="@color/status_lido" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/resumo_lidos"
+                            android:textAppearance="@style/Biblioteca.Texto.Rotulo" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- Não lidos -->
+                <com.google.android.material.card.MaterialCardView
+                    style="@style/Biblioteca.Cartao"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="20dp">
+                    android:layout_marginStart="@dimen/espaco_pequeno"
+                    android:layout_weight="1">
 
-                    <TextView
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/resumo_nao_lidos"
-                        android:textColor="@color/texto_secundario"
-                        android:textSize="16sp" />
+                        android:orientation="vertical"
+                        android:padding="@dimen/espaco_grande">
 
-                    <TextView
-                        android:id="@+id/tvNaoLidos"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="4dp"
-                        android:textColor="@color/status_nao_lido"
-                        android:textSize="40sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-            </androidx.cardview.widget.CardView>
+                        <ImageView
+                            android:layout_width="@dimen/icone_medio"
+                            android:layout_height="@dimen/icone_medio"
+                            android:importantForAccessibility="no"
+                            android:src="@drawable/ic_nao_lido"
+                            app:tint="@color/status_nao_lido" />
+
+                        <TextView
+                            android:id="@+id/tvNaoLidos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/espaco_medio"
+                            android:textAppearance="@style/Biblioteca.Texto.Numero"
+                            android:textColor="@color/status_nao_lido" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/resumo_nao_lidos"
+                            android:textAppearance="@style/Biblioteca.Texto.Rotulo" />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
     <!-- Menu inferior (o mesmo nas 3 telas) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        style="@style/Biblioteca.MenuInferior"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/superficie"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

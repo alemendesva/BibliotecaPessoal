@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ÍCONE DO APP — camada da FRENTE (um livro aberto com marcador âmbar).
+
+    Ícones adaptativos (Android 8+) têm 108x108dp, mas só o círculo central de ~66dp
+    sempre aparece (cada fabricante recorta em círculo, quadrado arredondado etc.).
+    Por isso o desenho fica concentrado no centro (entre 30 e 78).
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Página esquerda -->
+    <path
+        android:fillColor="#FFFAF6EE"
+        android:pathData="M30,39C38,35 46,35 53,39L53,75C46,71 38,71 30,75Z" />
+    <!-- Página direita -->
+    <path
+        android:fillColor="#FFFAF6EE"
+        android:pathData="M55,39C62,35 70,35 78,39L78,75C70,71 62,71 55,75Z" />
+    <!-- Linhas de "texto" na página esquerda -->
+    <path
+        android:fillColor="#FFBDEAE4"
+        android:pathData="M35,47h13v2h-13zM35,53h13v2h-13zM35,59h10v2h-10z" />
+    <!-- Marcador de página (fita âmbar) -->
+    <path
+        android:fillColor="#FFE0A04A"
+        android:pathData="M66,35L73,35L73,52L69.5,48.5L66,52Z" />
+</vector>

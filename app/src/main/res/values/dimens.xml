@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    MEDIDAS PADRONIZADAS do app (espaçamentos, cantos e tamanhos).
+
+    Em vez de espalhar números como "16dp" ou "12dp" por todos os layouts, eles ficam
+    aqui com um nome. Isso garante um ritmo visual consistente entre as telas e permite
+    ajustar o espaçamento do app inteiro mudando um único valor.
+    "dp" = medida independente da densidade da tela (fica do mesmo tamanho em qualquer celular).
+-->
+<resources>
+    <!-- Espaçamentos (escala de 4 em 4) -->
+    <dimen name="espaco_minimo">4dp</dimen>
+    <dimen name="espaco_pequeno">8dp</dimen>
+    <dimen name="espaco_medio">12dp</dimen>
+    <dimen name="espaco_grande">16dp</dimen>
+    <dimen name="espaco_extra">24dp</dimen>
+
+    <!-- Cartões -->
+    <dimen name="raio_cartao">16dp</dimen>
+    <dimen name="elevacao_cartao">1dp</dimen>
+
+    <!-- Faixa colorida do cartão de livro -->
+    <dimen name="largura_indicador">6dp</dimen>
+
+    <!-- Ícones -->
+    <dimen name="icone_medio">28dp</dimen>
+    <dimen name="icone_estado_vazio">96dp</dimen>
+
+    <!-- Anel de progresso da tela Resumo -->
+    <dimen name="tamanho_anel">148dp</dimen>
+    <dimen name="espessura_anel">12dp</dimen>
+    <!-- Metade da espessura = pontas totalmente arredondadas -->
+    <dimen name="raio_anel">6dp</dimen>
+
+    <!-- Altura mínima dos botões principais (área de toque confortável) -->
+    <dimen name="altura_botao">56dp</dimen>
+</resources>

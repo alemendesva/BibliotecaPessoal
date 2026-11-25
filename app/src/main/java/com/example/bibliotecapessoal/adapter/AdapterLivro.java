@@ -102,7 +102,7 @@ public class AdapterLivro extends RecyclerView.Adapter<AdapterLivro.LivroViewHol
             holder.tvNota.setText(R.string.sem_nota);
         }
 
-        // Status de leitura: texto e cor mudam (verde = Lido, vermelho = Não lido).
+        // Status de leitura: texto e cor mudam (verde = Lido, terracota = Não lido).
         // A mesma cor pinta a faixa lateral do cartão (viewIndicador).
         int corStatus;
         if (livro.isLido()) {

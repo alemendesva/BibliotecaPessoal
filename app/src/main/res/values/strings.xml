@@ -51,9 +51,19 @@
     <string name="dialogo_btn_sim">Excluir</string>
     <string name="dialogo_btn_nao">Cancelar</string>
 
+    <!-- Exclusão por arrastar (Snackbar com opção de desfazer) -->
+    <string name="msg_excluido_desfazer">\"%1$s\" foi excluído</string>
+    <string name="acao_desfazer">Desfazer</string>
+    <string name="msg_erro_desfazer">Não foi possível restaurar o livro</string>
+
+    <!-- Navegação -->
+    <string name="descricao_voltar">Voltar para a lista</string>
+
     <!-- Lista -->
-    <string name="lista_vazia">Nenhum livro cadastrado ainda.\nToque em \"Cadastrar\" para adicionar o primeiro.</string>
-    <string name="lista_dica">Toque para editar • Pressione e segure para excluir</string>
+    <string name="lista_vazia_titulo">Sua estante está vazia</string>
+    <string name="lista_vazia">Cadastre os livros que você tem, já leu ou quer ler e acompanhe tudo em um só lugar.</string>
+    <string name="btn_primeiro_livro">Adicionar meu primeiro livro</string>
+    <string name="lista_dica">Toque para editar • Deslize ou segure para excluir</string>
     <string name="formato_autor">Autor: %1$s</string>
     <string name="formato_ano">Ano: %1$d</string>
     <string name="formato_nota">Nota: %1$d/10</string>
@@ -65,4 +75,9 @@
     <string name="resumo_total">Total de livros</string>
     <string name="resumo_lidos">Livros lidos</string>
     <string name="resumo_nao_lidos">Livros não lidos</string>
+    <string name="resumo_progresso_titulo">Seu progresso de leitura</string>
+    <string name="resumo_percentual">%1$d%%</string>
+    <string name="resumo_progresso_legenda">lidos</string>
+    <string name="resumo_progresso_descricao">%1$d de %2$d livros lidos</string>
+    <string name="resumo_progresso_vazio">Cadastre livros para acompanhar seu progresso</string>
 </resources>

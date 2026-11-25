@@ -1,18 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
     TEMA VISUAL aplicado a todas as telas (definido no AndroidManifest.xml).
-    Herda do Material Components claro SEM ActionBar, porque cada tela usa sua
-    própria MaterialToolbar no layout. Os itens abaixo dizem quais cores de
-    colors.xml usar como primária, secundária, fundo e barra de status.
+
+    Herda do MATERIAL 3 (Material You), a versão mais recente do Material Design do Google:
+    cantos mais arredondados, botões em formato de pílula e o indicador em "pílula" no
+    item selecionado do menu inferior.
+
+    "DayNight" = o tema acompanha automaticamente o modo claro/escuro do celular
+    (as cores vêm de values/colors.xml ou values-night/colors.xml).
+    "NoActionBar" = sem barra de título automática, porque cada tela usa sua própria
+    MaterialToolbar no layout.
+
+    Cada item abaixo diz ao Material 3 qual cor de colors.xml usar em cada "papel"
+    (cor principal, superfícies, textos sobre cada cor etc.).
 -->
 <resources>
-    <style name="Theme.BibliotecaPessoal" parent="Theme.MaterialComponents.Light.NoActionBar">
+    <style name="Theme.BibliotecaPessoal" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Cor principal: botões, campos em foco, checkbox, anel de progresso -->
         <item name="colorPrimary">@color/primaria</item>
-        <item name="colorPrimaryVariant">@color/primaria_escura</item>
-        <item name="colorOnPrimary">@color/branco</item>
+        <item name="colorOnPrimary">@color/texto_sobre_primaria</item>
+        <item name="colorPrimaryContainer">@color/primaria_container</item>
+        <item name="colorOnPrimaryContainer">@color/texto_sobre_primaria_container</item>
+        <item name="colorPrimaryInverse">@color/primaria_inversa</item>
+
+        <!-- Cor de destaque: pílula do item selecionado no menu inferior -->
         <item name="colorSecondary">@color/secundaria</item>
-        <item name="colorOnSecondary">@color/branco</item>
+        <item name="colorOnSecondary">@color/texto_sobre_secundaria</item>
+        <item name="colorSecondaryContainer">@color/secundaria_container</item>
+        <item name="colorOnSecondaryContainer">@color/texto_sobre_secundaria_container</item>
+
+        <!-- Fundos e superfícies (telas, cartões, diálogos, menu) -->
         <item name="android:colorBackground">@color/fundo</item>
-        <item name="android:statusBarColor">@color/primaria_escura</item>
+        <item name="colorOnBackground">@color/texto_primario</item>
+        <item name="colorSurface">@color/superficie</item>
+        <item name="colorOnSurface">@color/texto_primario</item>
+        <item name="colorSurfaceVariant">@color/superficie_variante</item>
+        <item name="colorOnSurfaceVariant">@color/texto_secundario</item>
+        <item name="colorSurfaceContainerLowest">@color/superficie</item>
+        <item name="colorSurfaceContainerLow">@color/superficie</item>
+        <item name="colorSurfaceContainer">@color/superficie_container</item>
+        <item name="colorSurfaceContainerHigh">@color/superficie_container_alta</item>
+        <item name="colorSurfaceContainerHighest">@color/superficie_variante</item>
+        <item name="colorSurfaceInverse">@color/superficie_inversa</item>
+        <item name="colorOnSurfaceInverse">@color/texto_sobre_inversa</item>
+        <item name="colorOutline">@color/contorno</item>
+        <item name="colorOutlineVariant">@color/contorno</item>
+
+        <!-- Campos de texto: estilo "contornado" (borda arredondada em volta do campo) -->
+        <item name="textInputStyle">@style/Widget.Material3.TextInputLayout.OutlinedBox</item>
+    </style>
+
+    <!-- ==================== ESTILOS REUTILIZÁVEIS ====================
+         Um "style" agrupa vários atributos com um nome. Os layouts usam
+         style="@style/..." em vez de repetir os mesmos atributos em todo lugar.
+    -->
+
+    <!-- Barra superior usada nas 3 telas -->
+    <style name="Biblioteca.Toolbar" parent="Widget.Material3.Toolbar">
+        <item name="android:background">@color/barra_superior</item>
+        <item name="titleTextColor">@color/branco</item>
+        <item name="navigationIconTint">@color/branco</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Material3.TitleLarge</item>
+    </style>
+
+    <!-- Menu inferior usado nas 3 telas -->
+    <style name="Biblioteca.MenuInferior" parent="Widget.Material3.BottomNavigationView">
+        <item name="android:background">@color/superficie</item>
+        <item name="labelVisibilityMode">labeled</item>
+    </style>
+
+    <!-- Cartão padrão (cantos arredondados, sombra leve, sem borda) -->
+    <style name="Biblioteca.Cartao" parent="Widget.Material3.CardView.Elevated">
+        <item name="cardBackgroundColor">@color/superficie</item>
+        <item name="cardCornerRadius">@dimen/raio_cartao</item>
+        <item name="cardElevation">@dimen/elevacao_cartao</item>
+    </style>
+
+    <!-- ==================== TIPOGRAFIA ====================
+         Escala de textos baseada na tipografia do Material 3.
+         Cada estilo define tamanho, peso e cor de um "nível" de texto.
+    -->
+
+    <!-- Título de destaque (ex.: título do livro no cartão, título do estado vazio) -->
+    <style name="Biblioteca.Texto.Titulo" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textColor">@color/texto_primario</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Texto comum (ex.: autor) -->
+    <style name="Biblioteca.Texto.Corpo" parent="TextAppearance.Material3.BodyMedium">
+        <item name="android:textColor">@color/texto_secundario</item>
+    </style>
+
+    <!-- Texto pequeno (ex.: ano, nota, status, dica de uso) -->
+    <style name="Biblioteca.Texto.Legenda" parent="TextAppearance.Material3.BodySmall">
+        <item name="android:textColor">@color/texto_secundario</item>
+    </style>
+
+    <!-- Rótulo dos cartões do Resumo (ex.: "Livros lidos") -->
+    <style name="Biblioteca.Texto.Rotulo" parent="TextAppearance.Material3.LabelLarge">
+        <item name="android:textColor">@color/texto_secundario</item>
+    </style>
+
+    <!-- Números grandes do Resumo -->
+    <style name="Biblioteca.Texto.Numero" parent="TextAppearance.Material3.DisplaySmall">
+        <item name="android:textStyle">bold</item>
     </style>
 </resources>

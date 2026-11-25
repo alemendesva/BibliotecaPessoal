@@ -1,26 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-    PALETA DE CORES do app. Centralizar as cores aqui permite mudar o visual
+    PALETA DE CORES do app (MODO CLARO). Centralizar as cores aqui permite mudar o visual
     do app inteiro alterando um único arquivo. Formato: #AARRGGBB (AA = opacidade).
+
+    Identidade visual "biblioteca":
+      - Verde-petróleo profundo como cor principal (lembra capas de livros clássicos);
+      - Âmbar como destaque (lembra lombadas e marcadores de página);
+      - Fundo levemente creme, como papel de livro.
+
+    O MODO ESCURO usa os MESMOS nomes, com outros valores, no arquivo values-night/colors.xml.
+    O Android escolhe automaticamente o arquivo certo conforme o tema do celular.
 -->
 <resources>
-    <!-- Cores gerais (azul índigo como principal, laranja como destaque) -->
-    <color name="primaria">#FF3F51B5</color>
-    <color name="primaria_escura">#FF303F9F</color>
-    <color name="secundaria">#FFFF9800</color>
-    <color name="branco">#FFFFFFFF</color>
-    <color name="fundo">#FFF5F5F7</color>
-    <color name="superficie">#FFFFFFFF</color>
-    <color name="texto_primario">#FF212121</color>
-    <color name="texto_secundario">#FF757575</color>
+    <!-- Cor principal e suas variações -->
+    <color name="primaria">#FF1F5C5A</color>
+    <color name="primaria_escura">#FF154341</color>
+    <color name="texto_sobre_primaria">#FFFFFFFF</color>
+    <color name="primaria_container">#FFBDEAE4</color>
+    <color name="texto_sobre_primaria_container">#FF00201E</color>
 
-    <!-- Status de leitura -->
-    <color name="status_lido">#FF2E7D32</color>
-    <color name="status_nao_lido">#FFC62828</color>
+    <!-- Cor de destaque (âmbar) e suas variações. O "container" pinta a pílula do menu inferior -->
+    <color name="secundaria">#FFB8741A</color>
+    <color name="texto_sobre_secundaria">#FFFFFFFF</color>
+    <color name="secundaria_container">#FFF8DDB5</color>
+    <color name="texto_sobre_secundaria_container">#FF2C1A00</color>
+
+    <!-- Barra superior (Toolbar) e área da barra de status -->
+    <color name="barra_superior">#FF1F5C5A</color>
+    <color name="branco">#FFFFFFFF</color>
+
+    <!-- Fundos e superfícies (cartões, menu inferior, diálogos) -->
+    <color name="fundo">#FFFAF6EE</color>
+    <color name="superficie">#FFFFFDF9</color>
+    <color name="superficie_variante">#FFEDE6D8</color>
+    <color name="superficie_container">#FFF4EEE3</color>
+    <color name="superficie_container_alta">#FFEFE8DC</color>
+    <color name="contorno">#FFD8D0C2</color>
+
+    <!-- Cores "invertidas": usadas pela Snackbar (aviso escuro sobre a tela clara) -->
+    <color name="superficie_inversa">#FF2E3130</color>
+    <color name="texto_sobre_inversa">#FFF0F1EF</color>
+    <color name="primaria_inversa">#FF9CD3CB</color>
+
+    <!-- Textos -->
+    <color name="texto_primario">#FF1E2423</color>
+    <color name="texto_secundario">#FF5C6563</color>
+
+    <!-- Status de leitura (verde = lido, terracota = não lido) -->
+    <color name="status_lido">#FF2E7D5B</color>
+    <color name="status_nao_lido">#FFB5452F</color>
+
+    <!-- Fundo exibido atrás do cartão ao arrastar para excluir -->
+    <color name="fundo_excluir">#FFB5452F</color>
 
     <!-- Resumo -->
-    <color name="resumo_total">#FF3F51B5</color>
+    <color name="resumo_total">@color/primaria</color>
+    <color name="trilha_progresso">#FFE6DFD2</color>
 
     <!-- Ícones -->
-    <color name="icone">#FF000000</color>
+    <color name="icone">#FF1E2423</color>
 </resources>

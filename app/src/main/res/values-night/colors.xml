@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    PALETA DE CORES do MODO ESCURO.
+
+    O Android usa este arquivo automaticamente quando o celular está com o tema escuro
+    ativado (pasta "values-night"). Os NOMES das cores são exatamente os mesmos de
+    values/colors.xml; só os valores mudam. Assim nenhum layout precisa ser alterado.
+
+    Regras do modo escuro: fundos quase pretos (cansam menos a vista à noite) e cores de
+    destaque mais claras e suaves, para manter bom contraste sobre o fundo escuro.
+-->
+<resources>
+    <!-- Cor principal e suas variações -->
+    <color name="primaria">#FF84D3C9</color>
+    <color name="primaria_escura">#FF0E2E2D</color>
+    <color name="texto_sobre_primaria">#FF003733</color>
+    <color name="primaria_container">#FF1F5C5A</color>
+    <color name="texto_sobre_primaria_container">#FFBDEAE4</color>
+
+    <!-- Cor de destaque (âmbar) e suas variações -->
+    <color name="secundaria">#FFF2BC6B</color>
+    <color name="texto_sobre_secundaria">#FF452B00</color>
+    <color name="secundaria_container">#FF5E4313</color>
+    <color name="texto_sobre_secundaria_container">#FFF8DDB5</color>
+
+    <!-- Barra superior (Toolbar) e área da barra de status -->
+    <color name="barra_superior">#FF173B39</color>
+    <color name="branco">#FFFFFFFF</color>
+
+    <!-- Fundos e superfícies -->
+    <color name="fundo">#FF121514</color>
+    <color name="superficie">#FF1B1F1E</color>
+    <color name="superficie_variante">#FF2A302E</color>
+    <color name="superficie_container">#FF1F2423</color>
+    <color name="superficie_container_alta">#FF262B2A</color>
+    <color name="contorno">#FF3D4543</color>
+
+    <!-- Cores "invertidas" (Snackbar clara sobre a tela escura) -->
+    <color name="superficie_inversa">#FFE1E3E1</color>
+    <color name="texto_sobre_inversa">#FF2E3130</color>
+    <color name="primaria_inversa">#FF1F5C5A</color>
+
+    <!-- Textos -->
+    <color name="texto_primario">#FFE3E8E6</color>
+    <color name="texto_secundario">#FFA7B1AE</color>
+
+    <!-- Status de leitura -->
+    <color name="status_lido">#FF7FD1A6</color>
+    <color name="status_nao_lido">#FFF2A28F</color>
+
+    <!-- Fundo exibido atrás do cartão ao arrastar para excluir -->
+    <color name="fundo_excluir">#FF8C3322</color>
+
+    <!-- Resumo -->
+    <color name="trilha_progresso">#FF2A302E</color>
+
+    <!-- Ícones -->
+    <color name="icone">#FFE3E8E6</color>
+</resources>

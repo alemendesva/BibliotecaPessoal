@@ -1,5 +1,6 @@
 package com.example.bibliotecapessoal.view;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -7,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.activity.OnBackPressedCallback;
+import androidx.activity.SystemBarStyle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -28,7 +31,8 @@ import java.util.Calendar;
  * A MESMA tela serve para dois modos:
  *  - CADASTRO: aberta pelo menu "Cadastrar" → formulário vazio, botão "Salvar";
  *  - EDIÇÃO:   aberta ao tocar num livro da lista → recebe o livro pelo Intent,
- *              preenche o formulário e o botão vira "Atualizar".
+ *              preenche o formulário, o botão vira "Atualizar" e a Toolbar ganha
+ *              uma seta "voltar" que retorna à lista.
  *
  * Antes de gravar, valida os campos e mostra o erro embaixo do campo inválido.
  */
@@ -56,7 +60,8 @@ public class CadastroLivroActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+        // Ícones da barra de status em branco, sobre a barra superior verde-petróleo
+        EdgeToEdge.enable(this, SystemBarStyle.dark(Color.TRANSPARENT));
         setContentView(R.layout.activity_cadastro_livro);
 
         // Espaçamento para o conteúdo não ficar embaixo da barra de status
@@ -91,6 +96,7 @@ public class CadastroLivroActivity extends AppCompatActivity {
             // Ajusta textos para o modo edição
             btnSalvar.setText(R.string.btn_atualizar);
             toolbar.setTitle(R.string.titulo_edicao);
+            configurarVoltarParaLista(toolbar);
         }
 
         // Ao tocar no botão, chama o método salvar()
@@ -99,6 +105,31 @@ public class CadastroLivroActivity extends AppCompatActivity {
         // Menu inferior com o item "Cadastrar" destacado
         BottomNavigationView bottomNav = findViewById(R.id.bottomNav);
         NavegacaoMenu.configurar(this, bottomNav, R.id.nav_cadastro);
+    }
+
+    /**
+     * MODO EDIÇÃO: faz a seta da Toolbar E o botão "voltar" do celular retornarem à lista.
+     *
+     * Sem isso, como a lista foi fechada ao abrir a edição (NavegacaoMenu.irPara chama
+     * finish()), o "voltar" do celular fecharia o app inteiro em vez de voltar à lista.
+     * OnBackPressedCallback é a forma atual recomendada pelo Android de tratar o "voltar".
+     */
+    private void configurarVoltarParaLista(MaterialToolbar toolbar) {
+        toolbar.setNavigationIcon(R.drawable.ic_voltar);
+        toolbar.setNavigationContentDescription(R.string.descricao_voltar);
+        toolbar.setNavigationOnClickListener(v -> voltarParaLista());
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                voltarParaLista();
+            }
+        });
+    }
+
+    /** Abre a lista de livros e fecha esta tela (sem salvar nada). */
+    private void voltarParaLista() {
+        NavegacaoMenu.irPara(this, ListaLivrosActivity.class);
     }
 
     /**

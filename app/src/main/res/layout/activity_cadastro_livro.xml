@@ -3,27 +3,27 @@
     LAYOUT DA TELA DE CADASTRO / EDIÇÃO (CadastroLivroActivity).
 
     Estrutura:
-      1. Toolbar (o título muda para "Editar Livro" no modo edição)
+      1. Toolbar (o título muda para "Editar Livro" no modo edição e ganha a seta "voltar")
       2. Formulário rolável (ScrollView): Título, Autor, Ano, Nota, "Já li" e botão Salvar
       3. Menu inferior
 
     Os campos usam TextInputLayout (Material Design): o "hint" vira um rótulo
-    flutuante acima do campo quando o usuário começa a digitar.
+    flutuante acima do campo quando o usuário começa a digitar. O estilo "contornado"
+    (borda arredondada) é definido para o app inteiro em themes.xml (textInputStyle).
 -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/primaria">
+    android:background="@color/barra_superior">
 
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/toolbar"
+        style="@style/Biblioteca.Toolbar"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/primaria"
         app:title="@string/titulo_cadastro"
-        app:titleTextColor="@color/branco"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -44,7 +44,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="@dimen/espaco_grande"
+            android:paddingTop="@dimen/espaco_extra"
+            android:paddingEnd="@dimen/espaco_grande"
+            android:paddingBottom="@dimen/espaco_grande">
 
             <!-- Campo Título: textCapSentences = primeira letra maiúscula automaticamente -->
             <com.google.android.material.textfield.TextInputLayout
@@ -64,7 +67,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/espaco_grande"
                 android:hint="@string/hint_autor">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,7 +82,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/espaco_grande"
                 android:hint="@string/hint_ano">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -95,7 +98,7 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/espaco_grande"
                 android:hint="@string/hint_nota">
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -112,7 +115,7 @@
                 android:id="@+id/cbLido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="@dimen/espaco_medio"
                 android:text="@string/label_lido"
                 android:textColor="@color/texto_primario" />
 
@@ -121,7 +124,8 @@
                 android:id="@+id/btnSalvar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/espaco_extra"
+                android:minHeight="@dimen/altura_botao"
                 android:text="@string/btn_salvar" />
         </LinearLayout>
     </ScrollView>
@@ -129,10 +133,9 @@
     <!-- Menu inferior (o mesmo nas 3 telas) -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
+        style="@style/Biblioteca.MenuInferior"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/superficie"
-        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
